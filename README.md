@@ -1,4 +1,4 @@
-# pubkey
+# static-pubkey
 
 small crate that defines a `static_pubkey!` macro, used for compile-time parsing of public key strings into byte arrays for near 0-cost static public keys defined in your source code. The actual code is taken from [here](https://github.com/project-serum/anchor/commit/96036e149173603926074c6dba445c47bd6575aa).
 
