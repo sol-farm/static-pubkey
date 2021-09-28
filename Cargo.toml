@@ -6,7 +6,7 @@ description = " macro used for compile-time parsing of public key strings into b
 repository = "https://github.com/sol-farm/pubkey"
 readme = "./README.md"
 license = "MIT"
-keywords = ["solana", "public keys", "macro"]
+keywords = ["solana", "macro"]
 
 [lib]
 proc-macro = true
