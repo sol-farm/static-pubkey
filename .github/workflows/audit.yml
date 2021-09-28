@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - main
     paths: 
       # only run when the lock file changes
       #- '**/Cargo.toml'
