@@ -1,0 +1,25 @@
+name: Cargo Security audit
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths: 
+      # only run when the lock file changes
+      #- '**/Cargo.toml'
+      - '**/Cargo.lock'
+  pull_request:
+    branches:
+      - '*'
+    paths: 
+      # only run when the lock file changes
+      #- '**/Cargo.toml'
+      - '**/Cargo.lock'
+jobs:
+  security_audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions-rs/audit-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
