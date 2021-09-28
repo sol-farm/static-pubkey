@@ -4,6 +4,20 @@ use proc_macro2::Span;
 use quote::quote;
 use syn::{parse_macro_input, LitByte, LitStr};
 
+
+/// parses a string literal public key into a byte array public key
+///
+/// # Arguments
+///
+/// * `input` - A public key string
+///
+/// # Examples
+///
+/// ```
+/// use static_pubkey::static_pubkey;
+/// let key = static_pubkey!("GjphYQcbP1m3FuDyCTUJf2mUMxKPE3j6feWU1rxvC7Ps");
+/// assert!(key.to_string() == "GjphYQcbP1m3FuDyCTUJf2mUMxKPE3j6feWU1rxvC7Ps");
+/// ```
 #[proc_macro]
 pub fn static_pubkey(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     use std::convert::TryFrom;
