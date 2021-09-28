@@ -1,6 +1,6 @@
 # static-pubkey
 
-small crate that defines a `static_pubkey!` macro, used for compile-time parsing of public key strings into byte arrays for near 0-cost static public keys defined in your source code. The actual code is taken from [here](https://github.com/project-serum/anchor/commit/96036e149173603926074c6dba445c47bd6575aa).
+The `static-pubkey` crate provides a macro `static_pubkey!`, used for compile-time parsing of strings into a static public key. This prvodies an efficient way of declaring public keys in source code while incurring almost no runtime cost in solana programs, without having to declare the byte array yourself.  The actual code is taken from [here](https://github.com/project-serum/anchor/commit/96036e149173603926074c6dba445c47bd6575aa).
 
 
 # usage
