@@ -1,5 +1,5 @@
 [package]
-name = "pubkey"
+name = "static-pubkey"
 version = "1.0.0"
 edition = "2018"
 description = " macro used for compile-time parsing of public key strings into byte arrays for near 0-cost static public keys"

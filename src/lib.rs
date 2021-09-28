@@ -5,7 +5,7 @@ use quote::quote;
 use syn::{parse_macro_input, LitByte, LitStr};
 
 #[proc_macro]
-pub fn pubkey(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
+pub fn static_pubkey(input: proc_macro::TokenStream) -> proc_macro::TokenStream {
     use std::convert::TryFrom;
     let id_literal = parse_macro_input!(input as LitStr);
     let id_vec = bs58::decode(id_literal.value())
