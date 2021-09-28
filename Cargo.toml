@@ -1,9 +1,14 @@
+[workspace]
+exclude = [
+    "tests"
+]
+
 [package]
 name = "static-pubkey"
 version = "1.0.0"
 edition = "2018"
 description = " macro used for compile-time parsing of public key strings into byte arrays for near 0-cost static public keys"
-repository = "https://github.com/sol-farm/pubkey"
+repository = "https://github.com/sol-farm/static-pubkey"
 readme = "./README.md"
 license = "MIT"
 keywords = ["solana", "macro"]
@@ -16,7 +21,6 @@ bs58 = "0.4.0"
 proc-macro2 = "1.0.29"
 quote = "1.0.9"
 syn = {version = "1.0.77", features = ["full"]}
-solana-program = "1.7.10"
 
 [profile.release]
 lto = "fat"
