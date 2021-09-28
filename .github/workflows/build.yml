@@ -1,0 +1,74 @@
+# from https://github.com/jet-lab/jet-v1/blob/master/.github/workflows/build.yml
+name: build
+env:
+  cli-id: solana-1.7.10
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build-cli-deps:
+    runs-on: ubuntu-latest
+    steps:
+      - id: cache-cli-deps
+        uses: actions/cache@v2
+        with:
+          key: $${{ env.cli-id }}
+          path: |
+            ~/.local/share/solana
+            ~/.cargo
+            ~/.rustup
+            ~/.cargo/bin/anchor
+            ~/.npm
+      - id: install-os-deps
+        if: steps.cache-cli-deps.outputs.cache-hit != 'true'
+        run: sudo apt-get update && sudo apt-get install -y pkg-config build-essential libudev-dev
+      - id: install-rust-toolchain
+        if: steps.cache-cli-deps.outputs.cache-hit != 'true'
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+      - id: install-solana-tools
+        if: steps.cache-cli-deps.outputs.cache-hit != 'true'
+        run: sh -c "$(curl -sSfL https://release.solana.com/v1.7.10/install)"
+      - run: echo "PATH=$HOME/.local/share/solana/install/active_release/bin:$PATH" >> $GITHUB_ENV
+  build:
+    runs-on: ubuntu-latest
+    needs: [build-cli-deps]
+    steps:
+      - id: cache-cli-deps
+        uses: actions/cache@v2
+        with:
+          key: $${{ env.cli-id }}
+          path: |
+            ~/.local/share/solana
+            ~/.cargo
+            ~/.rustup
+            ~/.cargo/bin/anchor
+            ~/.npm
+      - run: echo "PATH=$HOME/.local/share/solana/install/active_release/bin:$HOME/.cargo/bin:$PATH" >> $GITHUB_ENV
+      - run: cargo test --lib
+  clippy_check:
+    runs-on: ubuntu-latest
+    needs: [build-cli-deps,build]
+    steps:
+      - id: cache-cli-deps
+        uses: actions/cache@v2
+        with:
+          key: $${{ env.cli-id }}
+          path: |
+            ~/.local/share/solana
+            ~/.cargo
+            ~/.rustup
+            ~/.cargo/bin/anchor
+            ~/.npm
+      - uses: actions/checkout@v1
+      - run: rustup component add clippy
+      - uses: actions-rs/clippy-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
