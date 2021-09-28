@@ -52,7 +52,7 @@ jobs:
             ~/.cargo/bin/anchor
             ~/.npm
       - run: echo "PATH=$HOME/.local/share/solana/install/active_release/bin:$HOME/.cargo/bin:$PATH" >> $GITHUB_ENV
-      - run: cargo test --lib
+      - run: cargo test tests
   clippy_check:
     runs-on: ubuntu-latest
     needs: [build-cli-deps,build]
